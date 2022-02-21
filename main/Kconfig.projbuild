@@ -3,7 +3,7 @@ menu "esp32-c3-rotary-encoder"
 config ROT_ENC_CLK_GPIO
     int "Rotary Encoder clock (A) GPIO number"
 	range 0 39
-	default 0
+	default 5
 	help
 		GPIO number (IOxx) to which the rotary encoder clock is connected.
 
@@ -12,7 +12,7 @@ config ROT_ENC_CLK_GPIO
 config ROT_ENC_DTA_GPIO
     int "Rotary Encoder data (B) GPIO number"
 	range 0 39
-	default 1
+	default 6
 	help
 		GPIO number (IOxx) to which the rotary encoder data is connected.
 
@@ -30,7 +30,7 @@ config ROT_ENC_DEBOUNCE
 config ROT_ENC_BUTTON_GPIO
 	int "Button GPIO number"
 	range 0 39
-	default 10
+	default 7
 	help
 		GPIO number (IOxx) to which the button is connected.
 
