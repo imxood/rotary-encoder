@@ -86,4 +86,11 @@ config ROT_ENC_TEST_PIN_GPIO
 		GPIO number (IOxx) to Enable irq event debugging.
 
 		Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used.
+
+config WS2812_ENABLE
+	bool "WS2812 Support"
+	default n
+	help
+		use WS2812 to test status
+
 endmenu

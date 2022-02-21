@@ -204,13 +204,13 @@ esp_err_t rotenc_init(rotenc_handle_t * handle,
 
         // configure GPIOs
         gpio_reset_pin(handle->pin_clk);
-        gpio_pad_select_gpio(handle->pin_clk);
+        // gpio_pad_select_gpio(handle->pin_clk);
         gpio_set_pull_mode(handle->pin_clk, GPIO_PULLUP_ONLY);
         gpio_set_direction(handle->pin_clk, GPIO_MODE_INPUT);
         gpio_set_intr_type(handle->pin_clk, GPIO_INTR_NEGEDGE);
 
         gpio_reset_pin(handle->pin_dta);
-        gpio_pad_select_gpio(handle->pin_dta);
+        // gpio_pad_select_gpio(handle->pin_dta);
         gpio_set_pull_mode(handle->pin_dta, GPIO_PULLUP_ONLY);
         gpio_set_direction(handle->pin_dta, GPIO_MODE_INPUT);
         gpio_set_intr_type(handle->pin_dta, GPIO_INTR_ANYEDGE);
@@ -249,7 +249,7 @@ esp_err_t rotenc_init_button(rotenc_handle_t * handle,
             ESP_ERROR_CHECK(esp_timer_create(&button_timer_args, &handle->button.timer));
 
             gpio_reset_pin(handle->button.pin);
-            gpio_pad_select_gpio(handle->button.pin);
+            // gpio_pad_select_gpio(handle->button.pin);
             gpio_set_pull_mode(handle->button.pin, GPIO_PULLUP_ONLY);
             gpio_set_direction(handle->button.pin, GPIO_MODE_INPUT);
             gpio_set_intr_type(handle->button.pin, GPIO_INTR_NEGEDGE);

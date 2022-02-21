@@ -35,7 +35,7 @@
  *        The led pin is configured with the macro: CONFIG_WS2812_LED_GPIO
  *        please use idf.py menuconfig. 
  */
-#ifdef CONFIG_IDF_TARGET_ESP32C3
+#if defined CONFIG_IDF_TARGET_ESP32C3 && defined CONFIG_WS2812_ENABLE
     #include <ws2812_led.h>
     #define DEFAULT_SATURATION  100
     #define DEFAULT_BRIGHTNESS  50
@@ -50,7 +50,7 @@ static void button_callback(void* arg)
     ESP_LOGI(TAG, "Reset rotary encoder");
     ESP_ERROR_CHECK(rotenc_reset(handle));
 
-#ifdef CONFIG_IDF_TARGET_ESP32C3
+#if defined CONFIG_IDF_TARGET_ESP32C3 && defined CONFIG_WS2812_ENABLE
     ws2812_led_clear();
 #endif
 }
@@ -61,7 +61,7 @@ static void event_callback(rotenc_event_t event)
     ESP_LOGI(TAG, "Event: position %d, direction %s", event.position,
                   event.direction ? (event.direction == ROTENC_CW ? "CW" : "CCW") : "NOT_SET");
 
-#ifdef CONFIG_IDF_TARGET_ESP32C3
+#if defined CONFIG_IDF_TARGET_ESP32C3 && defined CONFIG_WS2812_ENABLE
     uint16_t g_hue = (uint16_t) (event.position * 10);
     ws2812_led_set_hsv(g_hue, DEFAULT_SATURATION, DEFAULT_BRIGHTNESS);
 #endif
@@ -72,7 +72,7 @@ void app_main()
     // Verify that the GPIO ISR service is installed, before initializing the driver.
     ESP_ERROR_CHECK(gpio_install_isr_service(0));
 
-#ifdef CONFIG_IDF_TARGET_ESP32C3
+#if defined CONFIG_IDF_TARGET_ESP32C3 && defined CONFIG_WS2812_ENABLE
     esp_err_t err = ws2812_led_init();
     if  (err == ESP_OK) {
         ws2812_led_clear();
@@ -91,7 +91,7 @@ void app_main()
     ESP_ERROR_CHECK(rotenc_flip_direction(&handle));
 #endif
 
-#if CONFIG_PUSH_BUTTON
+#if defined CONFIG_IDF_TARGET_ESP32C3 && defined CONFIG_PUSH_BUTTON
     ESP_ERROR_CHECK(rotenc_init_button(&handle, 
                                        CONFIG_ROT_ENC_BUTTON_GPIO, 
                                        CONFIG_ROT_ENC_BUTTON_DEBOUNCE, 
